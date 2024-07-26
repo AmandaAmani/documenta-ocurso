@@ -210,7 +210,39 @@ Qualquer indisponibilidade ou incidente é sinalizado o mais rápido possível a
 
 ![image](https://github.com/user-attachments/assets/ee6f846d-5a81-44ae-9a3e-ccbbb4db9ea3)
 
-#Status Code
+# Status Code
+ A ZapSign utiliza os códigos de status HTTP padrão. Erros 4xx ocorrem quando há um problema na solicitação enviada pelo cliente para a ZapSign. Já os erros 5xx indicam problemas inesperados nos servidores da ZapSign.
 
+| Código | Referência         | Explicação                                                                                                                                                                              |
+|--------|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 400    | BAD REQUEST        | O servidor não processará a solicitação devido a algo que é percebido como um erro do cliente. Este é um erro genérico.A ZapSign processa todas as requisições em JSON, portanto erros no formato como falta de virgulas, base64 desformatados,etc podem ocasionar um erro 400.                                                                  |
+| 401    | UNAUTHORIZED       | O servidor não autorizou a requisição. Access Token inválido.                                                                                                                             |
+| 402    | PAYMENT REQUIRED   | O cliente não possui plano API. No ambiente de produção, é obrigatório possuir um plano mensal para utilizar a API em produção. Navegue até configurações>planos e preços ou [clique aqui](https://app.zapsign.co/conta/configuracoes/plans?tab=plans)                                                                                                                                                        |
+| 403    | FORBIDDEN          | O servidor não autorizou a requisição. Verifique se o API token utilizado corresponde ao ambiente que deseja utilizar                                                                                      |
+| 404    | NOT FOUND          | O servidor não encontrou o recurso ou não está disposto a divulgar sua existência. Verifique a url utilizada ou o template ID se estiver utilizando modelos dinâmicos                                                                                                      |
+| 406    | NOT ACCEPTABLE     | A requisição está chegando no servidor e o servidor está recusando.                                                                                                                      |
+| 429    | TOO MANY REQUESTS  | O cliente excedeu o limite de requisições permitidas em um determinado período de tempo.                                                                                                |
 
+# Tipos de Tokens e Como Localizá-los
 
+Tokens são essenciais para a integração e utilização eficiente da ZapSign. Neste guia, apresentamos os diferentes tipos de tokens disponíveis e como encontrá-los na plataforma. Se você precisa de informações sobre API Token, User Token, Template Token, Signer Token ou Doc Token, continue lendo!
+
+### API Token
+- **Localização:** Acesse **Configurações > Integrações > API Zapsign > Token de Acesso**.
+- **Descrição:** Este é o token principal da conta, utilizado para integrar com a API.
+
+### User Token
+- **Localização:** Vá para **Configurações > Meu Perfil > Segurança > Assinatura via API**.
+- **Descrição:** Token de assinatura exclusivo do usuário para assinatura em lote via API.
+
+### Template ID
+- **Localização:** Em **Modelos**, selecione o modelo desejado que deseja utilizar na API e clique em **Gerenciar**. Copie o código da URL após "modelos/".
+- **Descrição:** Token específico de um modelo/formulário criado na plataforma.
+
+### Signer Token
+- **Localização:** Conjunto de números após o /verificar na url..
+- **Descrição:** Token associado ao signatário. Após criar o documento e vincular os signatários, cada um possuirá seu próprio link. Este token ajuda a definir métodos de autenticação e até a detalhar o signatário via API.
+
+### Doc Token
+- **Localização:** Em **Documentos Criados**, selecione o documento e clique sobre ele. Copie o código da URL após "documentos/".
+- **Descrição:** Token único para um documento criado na plataforma, usado para identificação e operações específicas.
