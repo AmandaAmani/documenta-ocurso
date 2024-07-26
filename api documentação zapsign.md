@@ -21,12 +21,12 @@ Trabalhamos com uma API REST, que utiliza os métodos GET e POST. Lemos tudo em 
 
 #### Ambientes
 
-A ZapSign oferece dois ambientes para utilização da API. Se você ainda não realizou nenhuma integração com a ZapSign, recomendamos que você inicie pelo ambiente de testes (sandbox) para evitar cobranças indevidas. 
+A ZapSign oferece dois ambientes para utilização da API. Se você ainda não realizou nenhuma integração com a ZapSign, recomendamos que você inicie pelo ambiente de testes (sandbox) para evitar cobranças indevidas. Para utilizar o ambiente de produção, é necessário possuir um plano API. Você pode consultá-los em configurações>planos e preços ou [clicando aqui](https://app.zapsign.co/conta/configuracoes/plans?tab=plans).
 
-| Ambiente | Endpoint | Validade Jurídica |
-| -------- | -------- | ----------------- |
-| Sandbox  | https://sandbox.api.zapsign.com.br | Não possui validade jurídica |
-| Produção | https://api.zapsign.com.br | Possui validade jurídica |
+| Ambiente | Endpoint | Validade Jurídica | Precisa de um plano API?|
+| -------- | -------- | ----------------- |-------------------------|
+| Sandbox  | https://sandbox.api.zapsign.com.br | Não possui validade jurídica | Não precisa de plano API|
+| Produção | https://api.zapsign.com.br | Possui validade jurídica |Precisa de plano API|
 
 ## Integração com Clientes para API: Postman e Insomnia
 
@@ -217,7 +217,7 @@ Qualquer indisponibilidade ou incidente é sinalizado o mais rápido possível a
 |--------|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 400    | BAD REQUEST        | O servidor não processará a solicitação devido a algo que é percebido como um erro do cliente. Este é um erro genérico.A ZapSign processa todas as requisições em JSON, portanto erros no formato como falta de virgulas, base64 desformatados,etc podem ocasionar um erro 400.                                                                  |
 | 401    | UNAUTHORIZED       | O servidor não autorizou a requisição. Access Token inválido.                                                                                                                             |
-| 402    | PAYMENT REQUIRED   | O cliente não possui plano API. No ambiente de produção, é obrigatório possuir um plano mensal para utilizar a API em produção. Navegue até configurações>planos e preços ou [clique aqui](https://app.zapsign.co/conta/configuracoes/plans?tab=plans)                                                                                                                                                        |
+| 402    | PAYMENT REQUIRED   | O cliente não possui plano API. No ambiente de produção, é obrigatório possuir um plano mensal para utilizar a API em produção. Navegue até configurações>planos e preços ou [clique aqui](https://app.zapsign.co/conta/configuracoes/plans?tab=plans).|
 | 403    | FORBIDDEN          | O servidor não autorizou a requisição. Verifique se o API token utilizado corresponde ao ambiente que deseja utilizar                                                                                      |
 | 404    | NOT FOUND          | O servidor não encontrou o recurso ou não está disposto a divulgar sua existência. Verifique a url utilizada ou o template ID se estiver utilizando modelos dinâmicos                                                                                                      |
 | 406    | NOT ACCEPTABLE     | A requisição está chegando no servidor e o servidor está recusando.                                                                                                                      |
@@ -227,22 +227,22 @@ Qualquer indisponibilidade ou incidente é sinalizado o mais rápido possível a
 
 Tokens são essenciais para a integração e utilização eficiente da ZapSign. Neste guia, apresentamos os diferentes tipos de tokens disponíveis e como encontrá-los na plataforma. Se você precisa de informações sobre API Token, User Token, Template Token, Signer Token ou Doc Token, continue lendo!
 
-### API Token
+#### API Token
 - **Localização:** Acesse **Configurações > Integrações > API Zapsign > Token de Acesso**.
 - **Descrição:** Este é o token principal da conta, utilizado para integrar com a API.
 
-### User Token
+#### User Token
 - **Localização:** Vá para **Configurações > Meu Perfil > Segurança > Assinatura via API**.
 - **Descrição:** Token de assinatura exclusivo do usuário para assinatura em lote via API.
 
-### Template ID
+#### Template ID
 - **Localização:** Em **Modelos**, selecione o modelo desejado que deseja utilizar na API e clique em **Gerenciar**. Copie o código da URL após "modelos/".
 - **Descrição:** Token específico de um modelo/formulário criado na plataforma.
 
-### Signer Token
+#### Signer Token
 - **Localização:** Conjunto de números após o /verificar na url..
 - **Descrição:** Token associado ao signatário. Após criar o documento e vincular os signatários, cada um possuirá seu próprio link. Este token ajuda a definir métodos de autenticação e até a detalhar o signatário via API.
 
-### Doc Token
+#### Doc Token
 - **Localização:** Em **Documentos Criados**, selecione o documento e clique sobre ele. Copie o código da URL após "documentos/".
 - **Descrição:** Token único para um documento criado na plataforma, usado para identificação e operações específicas.
